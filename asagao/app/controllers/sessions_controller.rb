@@ -8,8 +8,9 @@ class SessionsController < ApplicationController
 		else
 			flash.alert = "名前とパスワードが一致しません"
 		end
-	redirect_to params[:from] || :root
+		redirect_to params[:from] || :root
 	end
+
 	def destroy
 		session.delete(:member_id)
 		redirect_to :root

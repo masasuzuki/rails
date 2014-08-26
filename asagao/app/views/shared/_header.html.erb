@@ -1,6 +1,6 @@
 <%= image_tag("logo.gif", size: "272x48", alt: "Moning Glory") %>
 <% if @current_member %>
-<p class ="member">
+<p class="member">
 <%= @current_member.name %>さん |
 <%= link_to "ログアウト", session,
 			method: :delete, confirm: "ログアウトしますか？" %>
@@ -12,4 +12,4 @@
 	<%= menu_link_to "ブログ", "#" %> &nbsp; |&nbsp;
 	<%= menu_link_to "会員名簿", :members %> &nbsp; |&nbsp;
 	<%= menu_link_to "管理ページ", "#" %>
-</div> 
+</div>

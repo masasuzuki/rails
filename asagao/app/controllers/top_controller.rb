@@ -2,7 +2,7 @@
 
 class TopController < ApplicationController
   def index
-  	@articles = Article.readable.order("released_at DESC").limit(5)
+  	@articles = Article.readable_for(@currenr_member).order("released_at DESC").limit(5)
   end
   def about
   end

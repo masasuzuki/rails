@@ -1,6 +1,6 @@
 #coding: utf-8
 
-class MembersController < ApplicationController
+class Admin::MembersController < Admin::Base
   def index
     @members = Member.order("number")
   end
@@ -22,7 +22,7 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(params[:member])
     if @member.save
-      redirect_to @member, notice: "会員を登録しました"
+      redirect_to [:admin, @member], notice: "会員を登録しました"
     else
       render "new"
     end
@@ -31,7 +31,7 @@ class MembersController < ApplicationController
     @member = Member.find(params[:id])
     @member.assign_attributes(params[:member])
     if @member.save
-      redirect_to @member, notice: "会員情報を更新しました"
+      redirect_to [:admin, @member], notice: "会員情報を更新しました"
     else
       render "edit"
     end
@@ -39,6 +39,6 @@ class MembersController < ApplicationController
   def destroy
     @member = Member.find(params[:id])
     @member.destroy
-    redirect_to :members, notice: "会員を削除しました"
+    redirect_to :admin_members, notice: "会員を削除しました"
   end
 end

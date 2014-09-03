@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
 		end
 		redirect_to params[:from] || :root
 	end
-
 	def destroy
 		session.delete(:member_id)
 		redirect_to :root

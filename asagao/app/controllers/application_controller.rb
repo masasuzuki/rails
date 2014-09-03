@@ -4,16 +4,15 @@ class ApplicationController < ActionController::Base
   before_filter :authorize
 
   class Forbidden < StandardError; end
-
+ 
+  def login_required
+    raise Forbidden unless @current_member
+  end
   private
   def authorize
   	if session[:member_id]
   		@current_member = Member.find_by_id(session[:member_id])
   		session.delete(:member_id) unless @current_member
   	end
-  end
-
-  def login_required
-  	raise Forbidden unless @current_member
   end
 end

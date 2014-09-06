@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class ArticlesController < ApplicationController
+class Admin::ArticlesController < Admin::Base
 	def index
 		@articles = Article.order("released_at DESC")	
 	end
@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(params[:article])
     if @article.save
-      redirect_to @article, notice: "ニュース記事を登録しました"
+      redirect_to [:admin, @article], notice: "ニュース記事を登録しました"
     else
       render "new"
     end
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.assign_attributes(params[:article])
     if @article.save
-      redirect_to @article, notice: "ニュース記事を更新しました"
+      redirect_to [:admin, @article], notice: "ニュース記事を更新しました"
     else
       render "edit"
    	end
@@ -33,7 +33,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    redirect_to :articles, notice: "ニュース記事を削除しました"
+    redirect_to :admin_articles, notice: "ニュース記事を削除しました"
   end
 
 

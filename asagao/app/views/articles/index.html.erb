@@ -7,8 +7,8 @@
 <p><%= truncate(article.body, length: 80) %>
 <%= link_to "もっと読む", article %></p>
 <p class ="article_footer">
-<%= article.released_at.strftime("%Y/%m/%d %H:%M")%></p>
+<%= article.released_at.strftime("%Y/%m/%d %H:%M") %></p>
 	<% end %>
 <% else %>
-<p>ニュースがありません</p>
+<p>ニュースがありません。</p>
 <% end %>

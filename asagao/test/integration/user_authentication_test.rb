@@ -7,7 +7,7 @@ class UserAuthenticationTest < ActionDispatch::IntegrationTest
 			password: "happy", password_confirmation: "happy")
 
 		post "/session", name: "taro", password: "happy", form: "/"
-		assertredirected_to "/"
+		assert_redirected_to "/"
 		assert_equal member.id, session[:member_id]
 
 		follow_redirect!

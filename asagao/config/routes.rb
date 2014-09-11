@@ -18,4 +18,5 @@ Asagao::Application.routes.draw do
 		collection{ get "search" }
 	end
 	resources :articles, only: [:index, :show]
+	resource :account, only: [:show, :edit, :update]
 end

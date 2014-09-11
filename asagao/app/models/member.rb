@@ -1,6 +1,9 @@
 class Member < ActiveRecord::Base
   #attr_accessible :title, :body
   include EmailAddressChecker
+  ACCESSIBLE_ATTRS = [:name, :full_name, :gender, :birthday, :email, :password, :password_confirmation]
+  attr_accessible *ACCESSIBLE_ATTRS
+  attr_accessible *(ACCESSIBLE_ATTRS + [:number, :administrator]), as: :admin
   validates :number, presence: true,
   numericality: {only_integer: true,
     greater_than: 0, less_than: 100, allow_blank: true },

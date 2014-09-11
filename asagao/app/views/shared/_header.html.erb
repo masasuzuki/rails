@@ -1,10 +1,9 @@
 
 <%= image_tag("logo.gif", size: "272x48", alt: "Moning Glory") %>
 <% if @current_member %>
-<p class="member">
-<%= @current_member.name %>さん |
-<%= link_to "ログアウト", :session,
-			method: :delete, confirm: "ログアウトしますか？" %>
+<p class ="member">
+<%= link_to @current_member.name + "さん", :account %> ｜
+<%= link_to "ログアウト", :session, method: :delete, confirm: "ログアウトしますか？" %>
 </p>
 <% end %>
 <% if controller.kind_of?(Admin::Base) %>

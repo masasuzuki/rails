@@ -2,15 +2,16 @@ class Article < ActiveRecord::Base
   # attr_accessible :title, :body
   validates :title, :body, :released_at, presence: true 
   validates :title, length: { maximum: 200 }
+  attr_accessible :title, :body, :released_at, :expired_at, :no_expiration, :member_only, as: :admin
   #scope :readable,
   #	->{ now = Time.current
   #		where("released_at <= ? AND (? < expired_at OR " +
   #					"expired_at IS NULL)", now, now) }
  validate :check_expired_at
- scope :readable_for
+ scope :readable_for,
     ->(member){
       now = Time.current
-      rel = where("released <= ? AND (? < expired_at OR " +
+      rel = where("released_at <= ? AND (? < expired_at OR " +
                   "expired_at IS NULL)", now, now)
       member.kind_of?(Member) ? rel : rel.where(member_only: false)}
  def no_expiration

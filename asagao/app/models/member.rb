@@ -1,7 +1,10 @@
 class Member < ActiveRecord::Base
   #attr_accessible :title, :body
+  has_one :image, class_name: "MemberImage", dependent: :destroy
+  accepts_nested_attributes_for :image, allow_destroy: true
+  has_many :entries, dependent: :destroy
   include EmailAddressChecker
-  ACCESSIBLE_ATTRS = [:name, :full_name, :gender, :birthday, :email, :password, :password_confirmation]
+  ACCESSIBLE_ATTRS = [:name, :full_name, :gender, :birthday, :email, :password, :password_confirmation, :image_attributes]
   attr_accessible *ACCESSIBLE_ATTRS
   attr_accessible *(ACCESSIBLE_ATTRS + [:number, :administrator]), as: :admin
   validates :number, presence: true,

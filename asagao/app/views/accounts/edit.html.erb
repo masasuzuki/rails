@@ -3,7 +3,7 @@
 
 <p><%= link_to "マイアカウントに戻る", :account %></p>
 
-<%= form_for @member, url: :account do |form| %>
+<%= form_for @member, url: :account, html: {multipart: true} do |form| %>
 <%= render "admin/members/form", form: form %>
 <p><%= form.submit %></p>
 <% end %>

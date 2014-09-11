@@ -19,4 +19,5 @@ Asagao::Application.routes.draw do
 	end
 	resources :articles, only: [:index, :show]
 	resource :account, only: [:show, :edit, :update]
+	match "anything" => "top#not_found"
 end

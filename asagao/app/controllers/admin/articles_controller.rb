@@ -2,7 +2,7 @@
 
 class Admin::ArticlesController < Admin::Base
 	def index
-		@articles = Article.order("released_at DESC")	
+		@articles = Article.order("released_at DESC").paginate(page: params[:page], per_page: 5)
 	end
 	def show
 		@article = Article.find(params[:id])

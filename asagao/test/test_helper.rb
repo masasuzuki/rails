@@ -16,6 +16,9 @@ class ActiveSupport::TestCase
   	session[:member_id] = Factory(:member, name: name,
   													administrator: admin).id
   end
+  def uploaded_file(fname, type)
+    Rack::Test::UploadedFile.new(Rails.root.join("test/factories", fname), type)
+  end
 end
 
 class ActionDispatch::IntegrationTest

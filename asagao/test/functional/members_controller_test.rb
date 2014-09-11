@@ -11,6 +11,7 @@ class MembersControllerTest < ActionController::TestCase
    	 assert_response :success
    end
    test "index before login" do
-   	 assert_raise(ApplicationController::Forbidden) { get :index }
+      get :index
+      assert_response 403
    end
 end

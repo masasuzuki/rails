@@ -9,6 +9,8 @@
 <p class ="article_footer">
 <%= article.released_at.strftime("%Y/%m/%d %H:%M") %></p>
 	<% end %>
+<%= will_paginate @articles %>
+
 <% else %>
 <p>ニュースがありません。</p>
 <% end %>

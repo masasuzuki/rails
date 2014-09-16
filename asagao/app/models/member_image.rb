@@ -5,6 +5,9 @@ class MemberImage < ActiveRecord::Base
   attr_accessible :uploaded_image
   attr_accessible :uploaded_image, as: :admin
   validate :check_image
+
+
+  
   def extension
   	IMAGE_TYPES[content_type]
   end

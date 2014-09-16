@@ -1,26 +1,34 @@
 class Member < ActiveRecord::Base
-  #attr_accessible :title, :body
-  has_one :image, class_name: "MemberImage", dependent: :destroy
-  accepts_nested_attributes_for :image, allow_destroy: true
-  has_many :entries, dependent: :destroy
   include EmailAddressChecker
-  ACCESSIBLE_ATTRS = [:name, :full_name, :gender, :birthday, :email, :password, :password_confirmation, :image_attributes]
-  attr_accessible *ACCESSIBLE_ATTRS
-  attr_accessible *(ACCESSIBLE_ATTRS + [:number, :administrator]), as: :admin
+
+  has_one :image, class_name: "MemberImage", dependent: :destroy
+  has_many :entries, dependent: :destroy
+
+  accepts_nested_attributes_for :image, allow_destroy: true
+
   validates :number, presence: true,
-  numericality: {only_integer: true,
-    greater_than: 0, less_than: 100, allow_blank: true },
-  uniqueness: true
+    numericality: { only_integer: true,
+       greater_than: 0, less_than: 100, allow_blank: true },
+    uniqueness: true
   validates :name, presence: true,
-    format: { with: /\A[A-Za-z]\w*\z/, allow_blank: true },
+    format: { with: /\A[A-Za-z]\w*\z/, allow_blank: true,
+              message: :invalid_member_name },
     length: { minimum: 2, maximum: 20, allow_blank: true },
     uniqueness: { case_sensitive: false }
   validates :full_name, length: { maximum: 20 }
   validate :check_email
-  attr_accessor :password, :password_confirmation
   validates :password, presence: { on: :create },
     confirmation: { allow_blank: true }
-  def password=(val)
+
+  attr_accessor :password, :password_confirmation
+
+  ACCESSIBLE_ATTRS = [ :name, :full_name, :gender, :birthday,
+    :email, :password, :password_confirmation, :image_attributes ]
+  attr_accessible *ACCESSIBLE_ATTRS
+  attr_accessible *(ACCESSIBLE_ATTRS + [:number, :administrator]),
+    as: :admin
+
+ def password=(val)
     if val.present?
       self.hashed_password = BCrypt::Password.create(val)
     end

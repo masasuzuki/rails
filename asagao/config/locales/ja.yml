@@ -4,6 +4,7 @@ ja:
       member: 会員情報
       article: ニュース記事
       member_image: 会員情報
+      entry: ブログ記事
     attributes:
       member:
         number: 背番号
@@ -35,6 +36,14 @@ ja:
         _destroy: 削除する
       image:
         uploaded_image: 画像
+      entry:
+        title: タイトル
+        body: 本文
+        posted_at: 日時
+        status: 状態
+        status_draft: 下書き
+        status_member_only: 会員限定
+        status_public: 公開
   will_paginate:
     previous_label: "前"
     next_label: "次"

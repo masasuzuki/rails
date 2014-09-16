@@ -13,6 +13,8 @@ Asagao::Application.routes.draw do
 	resource :session, only: [:create, :destroy]
 		resources :members do
 			collection { get "search" }
+
+			resources :entries, only: [:index]
 		end
 	resources :members, only: [:index, :show] do
 		collection{ get "search" }
@@ -20,4 +22,5 @@ Asagao::Application.routes.draw do
 	resources :articles, only: [:index, :show]
 	resource :account, only: [:show, :edit, :update]
 	match "anything" => "top#not_found"
+	resources :entries
 end

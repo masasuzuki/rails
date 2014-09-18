@@ -22,5 +22,8 @@ Asagao::Application.routes.draw do
 	resources :articles, only: [:index, :show]
 	resource :account, only: [:show, :edit, :update]
 	match "anything" => "top#not_found"
-	resources :entries
+	resources :entries do
+		member{ put "like", "unlike" }
+		collection {get "voted"}
+	end
 end

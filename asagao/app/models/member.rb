@@ -3,6 +3,8 @@ class Member < ActiveRecord::Base
 
   has_one :image, class_name: "MemberImage", dependent: :destroy
   has_many :entries, dependent: :destroy
+  has_many :votes, dependent: :destroy
+  has_many :voted_entries, through: :votes, source: :entry
 
   accepts_nested_attributes_for :image, allow_destroy: true
 
@@ -52,6 +54,9 @@ class Member < ActiveRecord::Base
         nil
       end
     end
+  end
+  def votable_for?(entry)
+    entry && entry.author != self && !votes.exists?(entry_id: entry.id)
   end
   private
   def check_email

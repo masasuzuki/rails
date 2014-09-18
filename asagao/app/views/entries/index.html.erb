@@ -2,7 +2,8 @@
 <h1><%= @page_title %></h1>
 
 <% if @current_member && @current_member == @member %>
-<p><%= link_to "ブログ記事の作成", :new_entry %></p>
+<p><%= link_to "ブログ記事の作成", :new_entry %> |
+ <%= link_to "投票した記事", :voted_entries %></p>
 <% end %>
 
 <% if @entries.present? %>

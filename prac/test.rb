@@ -1,3 +1,5 @@
 # coding: utf-8
-
-puts "こんにちは"
+colors = ["red", "blue", "yellow", "pink"]
+puts colors.empty?
+colors << "green"
+puts colors.length
